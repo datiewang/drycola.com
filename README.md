@@ -7,7 +7,7 @@ A personal blog about daily life in Japan, built with Hugo and the PaperMod them
 - **Author**: 王小铁
 - **Theme**: PaperMod
 - **Languages**: Chinese (zh-cn) and English
-- **URL**: https://datiewang.github.io/
+- **URL**: https://drycola.com/
 
 ## Development
 
@@ -24,7 +24,7 @@ hugo
 ```
 
 ### Deployment
-The site is configured for GitHub Pages deployment at `https://datiewang.github.io/`.
+The site is configured for GitHub Pages deployment at `https://drycola.com/`.
 
 ## Content
 Blog posts are stored in the `content/posts/` directory.
