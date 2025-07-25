@@ -1,4 +1,4 @@
-baseURL = "https://datiewang.github.io/"  # 改成你的实际 URL 或 GitHub Pages 地址
+baseURL = "https://drycola.com/"  # 改成你的实际 URL 或 GitHub Pages 地址
 languageCode = "zh-cn"
 title = "Drycola"
 theme = "PaperMod"
