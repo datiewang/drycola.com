@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "61f1a8e85142c219",
+    "type": "split",
+    "children": [
+      {
+        "id": "26a2f50c72e0aea2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "059902f31a555fd6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "迷茫的2025年.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "迷茫的2025年"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "fa9ffc36f810156c",
+    "type": "split",
+    "children": [
+      {
+        "id": "56b0ce1f4291baf2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d071e83bd85ba758",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "3bd523adfe8b51f7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "d17c7792ef961ec0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1321755454759a09",
+    "type": "split",
+    "children": [
+      {
+        "id": "3fde93ae9e7f0726",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f959710a2aff1db9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "迷茫的2025年.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "迷茫的2025年 的反向链接列表"
+            }
+          },
+          {
+            "id": "ec9fe749ed46eb2d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "迷茫的2025年.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "迷茫的2025年 的出链列表"
+            }
+          },
+          {
+            "id": "c0898c3453f1e27e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "e9cb4d46fa7f6fc3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "迷茫的2025年.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "迷茫的2025年 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "059902f31a555fd6",
+  "lastOpenFiles": []
+}
