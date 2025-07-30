@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://drycola.com/sitemap.xml

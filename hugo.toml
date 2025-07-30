@@ -10,10 +10,6 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
   description = "Daily life in Japan"
   keywords = ["Blog", "Japan", "Travel", "Daily"]
 
-# 本地开发服务器配置
-[server]
-  port = 1313
-  baseURL = "http://localhost:1313"
 
 # 语言配置
 [languages]
