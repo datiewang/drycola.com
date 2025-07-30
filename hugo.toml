@@ -9,6 +9,44 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
   author = "王小铁"
   description = "Daily life in Japan"
   keywords = ["Blog", "Japan", "Travel", "Daily"]
+  
+  # PaperMod 主题配置
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = false
+  tocopen = false
+
+# 主菜单配置
+[[menu.main]]
+name = "首页"
+url = "/"
+weight = 10
+
+[[menu.main]]
+name = "文章"
+url = "/posts/"
+weight = 20
+
+[[menu.main]]
+name = "分类"
+url = "/categories/"
+weight = 30
+
+[[menu.main]]
+name = "标签"
+url = "/tags/"
+weight = 40
 
 
 # 语言配置
