@@ -1,0 +1,29 @@
+{{- define "main" }}
+
+{{- if not .IsHome }}
+{{- partial "breadcrumbs.html" . }}
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- $tags := .Data.Terms.ByCount }}
+{{- if $tags }}
+<div class="tags-cloud">
+  {{- range $tags }}
+  {{- $weight := div (mul .Count 5.0) (add (len $.Data.Terms) 1) }}
+  {{- $weight := math.Ceil (add $weight 0.8) }}
+  <a href="{{ .Page.Permalink }}" class="tag-cloud-item tag-weight-{{ $weight }}">
+    <span class="tag-name"># {{ .Page.Title }}</span>
+    <span class="tag-count">{{ .Count }}</span>
+  </a>
+  {{- end }}
+</div>
+{{- end }}
+
+{{- end }}{{- /* end main */ -}}

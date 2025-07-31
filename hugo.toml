@@ -25,6 +25,7 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
   description = "记录在日本的生活。政治、文化，以及其间的空隙。"
   keywords = ["博客", "日本", "政治", "文化", "日常生活"]
   
+  
   # PaperMod 主题配置
   ShowReadingTime = true
   ShowShareButtons = true

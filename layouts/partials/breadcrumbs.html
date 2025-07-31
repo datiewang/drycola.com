@@ -1,0 +1,27 @@
+{{ if or .Parent .IsHome }}
+{{ if not .IsHome }}
+<nav id="breadcrumb">
+  {{- $ancestors := slice -}}
+  {{- $current := . -}}
+  {{- range $current.Ancestors.Reverse -}}
+    {{- $ancestors = $ancestors | append . -}}
+  {{- end -}}
+  {{- $ancestors = $ancestors | append $current -}}
+  
+  {{- range $index, $ancestor := $ancestors -}}
+    {{- if eq $index 0 -}}
+      {{- /* 跳过首页链接，不显示 "Home" */ -}}
+    {{- else -}}
+      {{- if gt $index 1 -}}
+        &nbsp;»&nbsp;
+      {{- end -}}
+      {{- if ne $ancestor $current -}}
+        <a href="{{ $ancestor.RelPermalink }}">{{ $ancestor.Title }}</a>
+      {{- else -}}
+        <span class="breadcrumb-current">{{ $ancestor.Title }}</span>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+</nav>
+{{ end }}
+{{ end }}

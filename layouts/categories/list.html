@@ -1,0 +1,54 @@
+{{- define "main" }}
+
+{{- if not .IsHome }}
+{{- partial "breadcrumbs.html" . }}
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- $categories := .Data.Terms.Alphabetical }}
+{{- if $categories }}
+<div class="categories-grid">
+  {{- range $name, $taxonomy := $categories }}
+  <div class="category-card">
+    <div class="category-header">
+      <h3 class="category-name">
+        <a href="{{ .Page.Permalink }}">
+          <span class="category-icon">📂</span>
+          {{ .Page.Title }}
+        </a>
+      </h3>
+      <span class="category-count">{{ .Count }} 篇文章</span>
+    </div>
+    
+    <div class="category-preview">
+      {{- $recentPosts := first 3 .Pages }}
+      {{- range $recentPosts }}
+      <div class="category-post-item">
+        <a href="{{ .Permalink }}" class="category-post-link">
+          <span class="category-post-title">{{ .Title }}</span>
+          <span class="category-post-date">{{ .Date.Format "01-02" }}</span>
+        </a>
+      </div>
+      {{- end }}
+      
+      {{- if gt .Count 3 }}
+      <div class="category-more">
+        <a href="{{ .Page.Permalink }}" class="category-more-link">
+          查看全部 {{ .Count }} 篇文章 →
+        </a>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+  {{- end }}
+</div>
+{{- end }}
+
+{{- end }}{{- /* end main */ -}}
