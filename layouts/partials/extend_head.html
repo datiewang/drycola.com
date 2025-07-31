@@ -221,4 +221,177 @@ body.home .main {
     color: var(--secondary);
     font-size: 0.9em;
 }
+
+/* 文章页面分类标签样式 */
+.post-categories {
+    margin: 10px 0 15px 0;
+}
+
+.post-category-tag {
+    display: inline-block;
+    background: var(--code-bg);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--secondary);
+    text-decoration: none;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+.post-category-tag:hover {
+    background: var(--tertiary);
+    color: var(--theme) !important;
+    border-color: var(--tertiary);
+}
+
+/* 右侧固定TOC样式 */
+.toc-sidebar {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 280px;
+    max-height: 60vh;
+    background: var(--theme);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.toc-sidebar-content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.toc-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 101;
+}
+
+.toc-sidebar-title {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9em;
+}
+
+.toc-sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--secondary);
+    font-size: 18px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.toc-sidebar-toggle:hover {
+    background: var(--tertiary);
+    color: var(--primary);
+}
+
+.toc-sidebar-nav {
+    padding: 12px 0;
+}
+
+.toc-sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-sidebar-item {
+    margin: 0;
+}
+
+.toc-sidebar-link {
+    display: block;
+    padding: 6px 16px;
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.85em;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.toc-sidebar-link:hover {
+    color: var(--primary);
+    background: var(--tertiary);
+    background-opacity: 0.1;
+    border-left-color: var(--tertiary);
+}
+
+.toc-sidebar-link.active {
+    color: var(--primary);
+    background: var(--tertiary);
+    background-opacity: 0.1;
+    border-left-color: var(--tertiary);
+    font-weight: 500;
+}
+
+/* TOC层级缩进 */
+.toc-level-1 .toc-sidebar-link { padding-left: 16px; font-weight: 500; }
+.toc-level-2 .toc-sidebar-link { padding-left: 24px; }
+.toc-level-3 .toc-sidebar-link { padding-left: 32px; font-size: 0.8em; }
+.toc-level-4 .toc-sidebar-link { padding-left: 40px; font-size: 0.8em; }
+.toc-level-5 .toc-sidebar-link { padding-left: 48px; font-size: 0.75em; }
+.toc-level-6 .toc-sidebar-link { padding-left: 56px; font-size: 0.75em; }
+
+/* 隐藏内容中的TOC在桌面端 */
+.toc-mobile {
+    display: none;
+}
+
+/* 响应式处理 */
+@media (max-width: 1400px) {
+    .toc-sidebar {
+        right: 10px;
+        width: 260px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .toc-sidebar {
+        display: none;
+    }
+    
+    .toc-mobile {
+        display: block;
+    }
+}
+
+/* 滚动条样式 */
+.toc-sidebar-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.toc-sidebar-content::-webkit-scrollbar-track {
+    background: var(--theme);
+}
+
+.toc-sidebar-content::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+}
+
+.toc-sidebar-content::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
 </style>

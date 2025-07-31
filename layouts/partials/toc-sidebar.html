@@ -1,0 +1,89 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tocSidebar = document.getElementById('toc-sidebar');
+    const tocToggle = document.getElementById('toc-toggle');
+    const tocLinks = document.querySelectorAll('.toc-sidebar-link');
+    
+    if (!tocSidebar) return;
+    
+    // 切换TOC显示/隐藏
+    if (tocToggle) {
+        tocToggle.addEventListener('click', function() {
+            if (tocSidebar.style.transform === 'translateY(-50%) translateX(100%)') {
+                tocSidebar.style.transform = 'translateY(-50%) translateX(0)';
+                tocToggle.textContent = '×';
+            } else {
+                tocSidebar.style.transform = 'translateY(-50%) translateX(100%)';
+                tocToggle.textContent = '📋';
+            }
+        });
+    }
+    
+    // 滚动时高亮当前章节
+    function updateActiveLink() {
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        let activeHeading = null;
+        
+        // 找到当前最接近的标题
+        for (let i = headings.length - 1; i >= 0; i--) {
+            const heading = headings[i];
+            const headingTop = heading.offsetTop - 100; // 提前100px触发
+            
+            if (scrollTop >= headingTop) {
+                activeHeading = heading;
+                break;
+            }
+        }
+        
+        // 更新活动链接
+        tocLinks.forEach(link => link.classList.remove('active'));
+        
+        if (activeHeading) {
+            const activeId = activeHeading.id;
+            const activeLink = document.querySelector(`.toc-sidebar-link[href="#${activeId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    }
+    
+    // 监听滚动事件
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                updateActiveLink();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // 初始化活动链接
+    updateActiveLink();
+    
+    // 平滑滚动到目标位置
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const targetTop = targetElement.offsetTop - 80; // 留出一些间距
+                window.scrollTo({
+                    top: targetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // 检测TOC是否应该显示（只在有内容时显示）
+    if (tocLinks.length === 0) {
+        tocSidebar.style.display = 'none';
+    }
+});
+</script>
