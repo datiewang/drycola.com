@@ -65,14 +65,10 @@
         {{- range .Pages }}
         {{- if eq .Kind "page" }}
         <div class="archive-entry">
-          <div class="archive-entry-meta">
-            {{- range first 1 .Params.categories }}
-            <a href="/categories/{{ . | urlize }}/" class="archive-category-tag">{{ . }}</a>
-            {{- end }}
-          </div>
-          <div class="archive-entry-title">
-            <a href="{{ .Permalink }}" class="archive-title-link">{{ .Title | markdownify }}</a>
-          </div>
+          {{- range first 1 .Params.categories }}
+          <a href="/categories/{{ . | urlize }}/" class="archive-category-tag">{{ . }}</a>
+          {{- end }}
+          <a href="{{ .Permalink }}" class="archive-title-link">{{ .Title | markdownify }}</a>
         </div>
         {{- end }}
         {{- end }}
@@ -124,23 +120,29 @@
   color: var(--theme) !important;
 }
 
-.archive-entry {
-  margin: 12px 0;
+.archive-day {
+  margin-bottom: 24px;
+  display: block;
+  clear: both;
+}
+
+.archive-posts {
+  padding-left: 20px;
   display: block;
 }
 
-.archive-entry-meta {
-  margin-bottom: 4px;
-}
-
-.archive-entry-title {
-  margin-top: 2px;
+.archive-entry {
+  margin: 8px 0;
+  display: block;
+  clear: both;
+  width: 100%;
 }
 
 .archive-title-link {
   color: var(--primary);
   text-decoration: none;
-  display: block;
+  display: inline;
+  margin-left: 8px;
   font-size: 1em;
 }
 
