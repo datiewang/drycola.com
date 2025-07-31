@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:adityatelange.github.io)",
+      "WebFetch(domain:github.com)",
+      "Bash(find:*)",
+      "Bash(git rm:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

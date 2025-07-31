@@ -4,6 +4,10 @@ title = "Drycola"
 theme = "PaperMod"
 enableRobotsTXT = true  # 生成 robots.txt 文件
 
+# 输出格式配置（用于搜索功能）
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 # 网站元信息配置
 [params]
   author = "王小铁"
@@ -27,25 +31,49 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
   showtoc = false
   tocopen = false
 
+  # Profile模式配置
+  [params.profileMode]
+    enabled = true
+    title = "王小铁"
+    subtitle = "在这里我会分享我在日本的日常生活，和我所关心的政治议题。"
+    
+    [[params.profileMode.buttons]]
+      name = "文章"
+      url = "/posts/"
+    
+    [[params.profileMode.buttons]]
+      name = "归档"
+      url = "/archive/"
+    
+    [[params.profileMode.buttons]]
+      name = "标签"
+      url = "/tags/"
+
+  # 网站图标配置
+  [params.assets]
+    favicon = "/favicon.ico"
+    favicon16x16 = "/favicon-16x16.svg"
+    favicon32x32 = "/favicon.svg"
+
 # 主菜单配置
 [[menu.main]]
-name = "首页"
-url = "/"
+name = "归档"
+url = "/archive/"
 weight = 10
 
 [[menu.main]]
-name = "文章"
-url = "/posts/"
+name = "搜索"
+url = "/search/"
 weight = 20
-
-[[menu.main]]
-name = "分类"
-url = "/categories/"
-weight = 30
 
 [[menu.main]]
 name = "标签"
 url = "/tags/"
+weight = 30
+
+[[menu.main]]
+name = "分类"
+url = "/categories/"
 weight = 40
 
 
