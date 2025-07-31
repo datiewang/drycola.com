@@ -43,19 +43,15 @@
   </h2>
   {{- range .Pages.GroupByDate "January" }}
   <div class="archive-month">
-    <h3 class="archive-month-header">
-      {{- .Key -}}
-      <sup class="archive-count">&nbsp;{{ len .Pages }}</sup>
-    </h3>
     <div class="archive-posts">
       {{- range .Pages }}
       {{- if eq .Kind "page" }}
       <div class="archive-entry">
         <h3 class="archive-entry-title">
           <span class="archive-date-category">
-            <time>{{ .Date.Format "01-02" }}</time>
+            <time>{{ .Date.Format "January 2" }}</time>
             {{- range first 1 .Params.categories }}
-            <span class="archive-category-tag">{{ . }}</span>
+            <a href="/categories/{{ . | urlize }}/" class="archive-category-tag">{{ . }}</a>
             {{- end }}
           </span>
           <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
@@ -86,6 +82,13 @@
   border-radius: 3px;
   font-size: 0.9em;
   color: var(--content);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.archive-category-tag:hover {
+  background: var(--tertiary);
+  color: var(--primary);
 }
 
 .archive-entry-title {

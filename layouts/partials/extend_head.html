@@ -37,4 +37,75 @@ body.home .main {
 .main {
     margin-top: 0 !important;
 }
+
+/* TOC 目录样式优化 */
+.toc {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+
+.toc details {
+    margin: 0;
+}
+
+.toc summary {
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 1em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.toc summary:hover {
+    color: var(--tertiary);
+}
+
+.toc nav {
+    margin-top: 10px;
+}
+
+.toc ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.toc li {
+    margin: 4px 0;
+    line-height: 1.4;
+}
+
+.toc a {
+    color: var(--secondary);
+    text-decoration: none;
+    padding: 2px 0;
+    display: block;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
+    margin-left: -8px;
+    transition: all 0.2s ease;
+}
+
+.toc a:hover {
+    color: var(--primary);
+    border-left-color: var(--tertiary);
+    background: rgba(var(--tertiary-rgb), 0.1);
+}
+
+/* TOC嵌套列表样式 */
+.toc ul ul {
+    padding-left: 16px;
+    margin-top: 4px;
+}
+
+.toc ul ul a {
+    font-size: 0.95em;
+    opacity: 0.8;
+}
 </style>

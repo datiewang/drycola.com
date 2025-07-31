@@ -33,3 +33,6 @@ other = "编辑此页"
 
 [search_placeholder]
 other = "搜索..."
+
+[toc]
+other = "目录"
