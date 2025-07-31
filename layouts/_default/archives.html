@@ -1,7 +1,25 @@
 {{- define "main" }}
 
 <header class="page-header">
-  <h1>{{ .Title }}</h1>
+  <h1>
+    {{ .Title }}
+    {{- if (.Param "ShowRssButtonInSectionTermList") }}
+    {{- $rss := (.OutputFormats.Get "rss") }}
+    {{- if (eq .Kind `page`) }}
+    {{- $rss = (.Parent.OutputFormats.Get "rss") }}
+    {{- end }}
+    {{- with $rss }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
   {{- if .Description }}
   <div class="post-description">
     {{ .Description }}
@@ -9,32 +27,60 @@
   {{- end }}
 </header>
 
-{{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 
-{{- if .Site.Params.ShowAllPagesInArchive }}
-{{- $pages = .Site.RegularPages }}
+{{- if site.Params.ShowAllPagesInArchive }}
+{{- $pages = site.RegularPages }}
 {{- end }}
 
 {{- range $pages.GroupByPublishDate "2006" }}
 {{- if ne .Key "0001" }}
 <div class="archive-year">
-  <h2 class="archive-year-header">
-    {{- replace .Key "0001" "" }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
+  {{- $year := replace .Key "0001" "" }}
+  <h2 class="archive-year-header" id="{{ $year }}">
+    <a class="archive-header-link" href="#{{ $year }}">
+      {{- $year -}}
+    </a>
+    <sup class="archive-count">&nbsp;{{ len .Pages }}</sup>
   </h2>
-  {{- range .Pages }}
+  {{- range .Pages.GroupByDate "January" }}
   <div class="archive-month">
-    <div class="archive-entry">
-      <h3 class="archive-entry-title">
-        <span class="archive-meta">
-          <time>{{ .Date.Format "01-02" }}</time>
-          {{- with .Params.categories }}
-          {{- range first 1 . }}
-          <span class="archive-category">{{ . }}</span>
+    <h3 class="archive-month-header" id="{{ $year }}-{{ .Key }}">
+      <a class="archive-header-link" href="#{{ $year }}-{{ .Key }}">
+        {{- .Key -}}
+      </a>
+      <sup class="archive-count">&nbsp;{{ len .Pages }}</sup>
+    </h3>
+    <div class="archive-posts">
+      {{- range .Pages }}
+      {{- if eq .Kind "page" }}
+      <div class="archive-entry">
+        <h3 class="archive-entry-title entry-hint-parent">
+          <span class="archive-meta-custom">
+            <time>{{ .Date.Format "01-02" }}</time>
+            {{- with .Params.categories }}
+            {{- range first 1 . }}
+            <span class="archive-category">{{ . }}</span>
+            {{- end }}
+            {{- end }}
+          </span>
+          {{- .Title | markdownify }}
+          {{- if .Draft }}
+          <span class="entry-hint" title="Draft">
+            <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" fill="currentColor">
+              <path
+                d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+            </svg>
+          </span>
           {{- end }}
-          {{- end }}
-        </span>
-        <a href="{{ .Permalink }}" aria-label="post link">{{ .Title | markdownify }}</a>&nbsp;
-      </h3>
+        </h3>
+        <div class="archive-meta">
+          {{- partial "post_meta.html" . -}}
+        </div>
+        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+      </div>
+      {{- end }}
+      {{- end }}
     </div>
   </div>
   {{- end }}
@@ -43,34 +89,27 @@
 {{- end }}
 
 <style>
-.archive-meta {
+.archive-meta-custom {
   font-size: 0.85em;
   color: var(--secondary);
-  margin-right: 8px;
+  margin-right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .archive-category {
   background: var(--code-bg);
   padding: 2px 6px;
   border-radius: 3px;
-  margin-left: 6px;
   font-size: 0.8em;
+  color: var(--content);
 }
 
 .archive-entry-title {
   display: flex;
   align-items: center;
-  margin: 8px 0;
-}
-
-.archive-year-header {
-  margin: 40px 0 20px 0;
-  color: var(--primary);
-}
-
-.archive-count {
-  font-size: 0.6em;
-  color: var(--secondary);
+  flex-wrap: wrap;
 }
 </style>
 
