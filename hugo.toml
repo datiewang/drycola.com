@@ -35,6 +35,11 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
   [params.homeInfoParams]
     Title = "王小铁"
     Content = "在这里我会分享我在日本的日常生活，和我所关心的政治议题。"
+  
+  # 社交图标配置（可选）
+  socialIcons = [
+    {name = "github", url = "https://github.com/datiewang"}
+  ]
 
   # 网站图标配置
   [params.assets]
@@ -71,9 +76,51 @@ weight = 40
     weight = 1
     languageName = "zh-cn"
     description = "Daily life in Japan"
+    
+    # 中文菜单配置
+    [[languages.zh-cn.menu.main]]
+    name = "归档"
+    url = "/archive/"
+    weight = 10
+
+    [[languages.zh-cn.menu.main]]
+    name = "分类"
+    url = "/categories/"
+    weight = 20
+
+    [[languages.zh-cn.menu.main]]
+    name = "搜索"
+    url = "/search/"
+    weight = 30
+
+    [[languages.zh-cn.menu.main]]
+    name = "标签"
+    url = "/tags/"
+    weight = 40
 
   [languages.en]
     title = "Drycola"
     weight = 2
     languageName = "English"
     description = "Daily life in Japan"
+    
+    # 英文菜单配置
+    [[languages.en.menu.main]]
+    name = "Archive"
+    url = "/archive/"
+    weight = 10
+
+    [[languages.en.menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 20
+
+    [[languages.en.menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 30
+
+    [[languages.en.menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 40
