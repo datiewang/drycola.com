@@ -12,7 +12,8 @@
       "Bash(rm:*)",
       "Bash(grep:*)",
       "WebFetch(domain:drycola.com)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "WebFetch(domain:hungchienhsiang.medium.com)"
     ],
     "deny": []
   }

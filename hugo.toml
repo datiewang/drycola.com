@@ -4,6 +4,7 @@ title = "Drycola"
 theme = "PaperMod"
 enableRobotsTXT = true  # 生成 robots.txt 文件
 defaultContentLanguage = "zh-cn"  # 默认内容语言
+hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中文字数
 
 # 语言配置
 [languages]

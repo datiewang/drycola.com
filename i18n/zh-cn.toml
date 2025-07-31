@@ -17,7 +17,7 @@ other = "文章"
 other = "{{ .Count }} 分钟阅读"
 
 [words]
-other = "{{ .Count }} 字"
+other = "{{ .Count }} words"
 
 [author]
 other = "作者"
