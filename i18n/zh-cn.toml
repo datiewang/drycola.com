@@ -34,8 +34,6 @@ other = "编辑此页"
 [search_placeholder]
 other = "搜索..."
 
-[toc]
-other = "快速导览"
 
 # 确保翻译生效，覆盖主题的默认翻译
 [prev_page]
