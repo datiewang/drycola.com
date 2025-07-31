@@ -31,23 +31,10 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
   showtoc = false
   tocopen = false
 
-  # Profile模式配置
-  [params.profileMode]
-    enabled = true
-    title = "王小铁"
-    subtitle = "在这里我会分享我在日本的日常生活，和我所关心的政治议题。"
-    
-    [[params.profileMode.buttons]]
-      name = "文章"
-      url = "/posts/"
-    
-    [[params.profileMode.buttons]]
-      name = "归档"
-      url = "/archive/"
-    
-    [[params.profileMode.buttons]]
-      name = "标签"
-      url = "/tags/"
+  # Home Info 模式配置 (Regular Mode)
+  [params.homeInfoParams]
+    Title = "王小铁"
+    Content = "在这里我会分享我在日本的日常生活，和我所关心的政治议题。"
 
   # 网站图标配置
   [params.assets]
@@ -62,18 +49,18 @@ url = "/archive/"
 weight = 10
 
 [[menu.main]]
+name = "分类"
+url = "/categories/"
+weight = 20
+
+[[menu.main]]
 name = "搜索"
 url = "/search/"
-weight = 20
+weight = 30
 
 [[menu.main]]
 name = "标签"
 url = "/tags/"
-weight = 30
-
-[[menu.main]]
-name = "分类"
-url = "/categories/"
 weight = 40
 
 
