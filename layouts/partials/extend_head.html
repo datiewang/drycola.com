@@ -2,49 +2,65 @@
 <style>
 /* 主页布局优化：减少空白间距 */
 .main {
-    padding-top: 20px !important;
+    padding-top: 16px !important;
 }
 
+/* 个人介绍区域响应式优化 */
 .home-info {
-    margin-bottom: 20px !important;
+    margin-bottom: 16px !important;
+    max-width: fit-content !important;
+    width: auto !important;
+}
+
+.home-info .home-title {
+    margin-bottom: 6px !important;
 }
 
 .home-info .home-subtitle {
-    margin-top: 8px !important;
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
+    max-width: none !important;
+    width: auto !important;
 }
 
 /* 减少文章列表间距 */
 .main .post-entry {
-    margin-bottom: 20px !important;
+    margin-bottom: 16px !important;
 }
 
 /* 减少profile和posts之间的间距 */
 .profile {
-    margin-bottom: 20px !important;
-}
-
-/* 如果有分页，减少分页和内容的间距 */
-.page-footer {
-    margin-top: 30px !important;
+    margin-bottom: 16px !important;
 }
 
 /* 优化首页整体间距 */
 body.home .main {
-    padding-top: 20px !important;
+    padding-top: 16px !important;
 }
 
-/* 减少header和main之间的间距 */
-.main {
-    margin-top: 0 !important;
+/* 减少各部分间的大间距 */
+.main > * + * {
+    margin-top: 16px !important;
+}
+
+/* 移除不必要的空白 */
+.profile, .home-info {
+    min-height: auto !important;
+}
+
+/* 确保内容紧凑显示 */
+.home-info, .profile {
+    display: inline-block !important;
+    width: auto !important;
 }
 
 /* TOC 目录样式优化 */
 .toc {
     background: var(--code-bg);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 24px 0;
     font-size: 0.9em;
 }
 
@@ -56,56 +72,59 @@ body.home .main {
     font-weight: 600;
     color: var(--primary);
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 1em;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
+    padding: 4px 0;
+    list-style: none;
+}
+
+.toc summary::-webkit-details-marker {
+    display: none;
+}
+
+.toc summary::before {
+    content: "📋 ";
+    margin-right: 4px;
 }
 
 .toc summary:hover {
     color: var(--tertiary);
 }
 
-.toc nav {
-    margin-top: 10px;
-}
-
-.toc ul {
+.toc nav ul {
     margin: 0;
-    padding-left: 20px;
+    padding-left: 16px;
     list-style: none;
 }
 
-.toc li {
-    margin: 4px 0;
-    line-height: 1.4;
+.toc nav li {
+    margin: 6px 0;
+    line-height: 1.5;
 }
 
-.toc a {
+.toc nav a {
     color: var(--secondary);
     text-decoration: none;
-    padding: 2px 0;
+    padding: 3px 6px;
     display: block;
-    border-left: 2px solid transparent;
-    padding-left: 8px;
-    margin-left: -8px;
+    border-radius: 3px;
     transition: all 0.2s ease;
 }
 
-.toc a:hover {
+.toc nav a:hover {
     color: var(--primary);
-    border-left-color: var(--tertiary);
-    background: rgba(var(--tertiary-rgb), 0.1);
+    background: var(--tertiary);
+    background-opacity: 0.1;
 }
 
 /* TOC嵌套列表样式 */
-.toc ul ul {
-    padding-left: 16px;
-    margin-top: 4px;
+.toc nav ul ul {
+    padding-left: 12px;
+    margin-top: 2px;
 }
 
-.toc ul ul a {
-    font-size: 0.95em;
-    opacity: 0.8;
+.toc nav ul ul a {
+    font-size: 0.9em;
+    opacity: 0.85;
 }
 </style>
