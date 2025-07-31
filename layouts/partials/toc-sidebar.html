@@ -9,12 +9,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // 切换TOC显示/隐藏
     if (tocToggle) {
         tocToggle.addEventListener('click', function() {
-            if (tocSidebar.style.transform === 'translateY(-50%) translateX(100%)') {
-                tocSidebar.style.transform = 'translateY(-50%) translateX(0)';
+            if (tocSidebar.classList.contains('hidden')) {
+                // 显示TOC
+                tocSidebar.classList.remove('hidden');
                 tocToggle.textContent = '×';
+                tocToggle.title = '关闭快速导览';
             } else {
-                tocSidebar.style.transform = 'translateY(-50%) translateX(100%)';
+                // 隐藏TOC
+                tocSidebar.classList.add('hidden');
                 tocToggle.textContent = '📋';
+                tocToggle.title = '打开快速导览';
             }
         });
     }

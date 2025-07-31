@@ -250,7 +250,7 @@ body.home .main {
 .toc-sidebar {
     position: fixed;
     top: 50%;
-    right: 20px;
+    right: 40px;
     transform: translateY(-50%);
     width: 280px;
     max-height: 60vh;
@@ -362,8 +362,15 @@ body.home .main {
 /* 响应式处理 */
 @media (max-width: 1400px) {
     .toc-sidebar {
-        right: 10px;
+        right: 30px;
         width: 260px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .toc-sidebar {
+        right: 20px;
+        width: 240px;
     }
 }
 
@@ -393,5 +400,18 @@ body.home .main {
 
 .toc-sidebar-content::-webkit-scrollbar-thumb:hover {
     background: var(--secondary);
+}
+
+/* 隐藏状态下的TOC样式 */
+.toc-sidebar.hidden {
+    transform: translateY(-50%) translateX(calc(100% - 40px)) !important;
+}
+
+.toc-sidebar.hidden .toc-sidebar-content {
+    pointer-events: none;
+}
+
+.toc-sidebar.hidden .toc-sidebar-header {
+    pointer-events: auto;
 }
 </style>
