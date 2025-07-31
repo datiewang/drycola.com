@@ -5,6 +5,15 @@ theme = "PaperMod"
 enableRobotsTXT = true  # 生成 robots.txt 文件
 defaultContentLanguage = "zh-cn"  # 默认内容语言
 
+# 语言配置
+[languages]
+  [languages.zh-cn]
+    languageName = "中文"
+    weight = 1
+    [languages.zh-cn.params]
+      ShowWordCount = true
+      ShowReadingTime = true
+
 # 输出格式配置（用于搜索功能）
 [outputs]
   home = ["HTML", "RSS", "JSON"]

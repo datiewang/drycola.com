@@ -193,4 +193,32 @@ body.home .main {
         gap: 4px !important;
     }
 }
+
+/* 主页文章列表样式优化 */
+.entry-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.entry-category a {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.entry-category a:hover {
+    background: var(--tertiary);
+    color: var(--theme) !important;
+}
+
+.entry-separator {
+    color: var(--secondary);
+    font-size: 0.9em;
+}
 </style>

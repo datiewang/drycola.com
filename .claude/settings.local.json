@@ -11,7 +11,8 @@
       "Bash(ls:*)",
       "Bash(rm:*)",
       "Bash(grep:*)",
-      "WebFetch(domain:drycola.com)"
+      "WebFetch(domain:drycola.com)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }
