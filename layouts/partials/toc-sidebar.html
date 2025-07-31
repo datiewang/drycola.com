@@ -52,19 +52,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 桌面端切换TOC显示/隐藏
     if (tocToggle) {
-        tocToggle.addEventListener('click', function() {
-            if (tocSidebar.classList.contains('hidden')) {
-                // 显示TOC
-                tocSidebar.classList.remove('hidden');
-                tocSidebar.removeAttribute('data-user-hidden');
-                tocToggle.textContent = '×';
-                tocToggle.title = '关闭快速导览';
-            } else {
-                // 隐藏TOC
-                tocSidebar.classList.add('hidden');
-                tocSidebar.setAttribute('data-user-hidden', 'true');
-                tocToggle.textContent = '📋';
-                tocToggle.title = '打开快速导览';
+        tocToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 确保在桌面端模式下操作
+            if (!isMobile()) {
+                if (tocSidebar.classList.contains('hidden')) {
+                    // 显示TOC
+                    tocSidebar.classList.remove('hidden');
+                    tocSidebar.removeAttribute('data-user-hidden');
+                    tocToggle.textContent = '×';
+                    tocToggle.title = '关闭快速导览';
+                } else {
+                    // 隐藏TOC
+                    tocSidebar.classList.add('hidden');
+                    tocSidebar.setAttribute('data-user-hidden', 'true');
+                    tocToggle.textContent = '☰';
+                    tocToggle.title = '打开快速导览';
+                }
+                
+                // 确保移动端遮罩层不会被激活
+                if (tocMobileOverlay) {
+                    tocMobileOverlay.classList.remove('active');
+                }
+                tocSidebar.classList.remove('mobile-open');
+                document.body.style.overflow = '';
             }
         });
     }
@@ -98,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (tocMobileOverlay) {
             tocMobileOverlay.classList.remove('active');
         }
-        tocMobileToggle.textContent = '📋';
+        tocMobileToggle.textContent = '☰';
         tocMobileToggle.title = '打开快速导览';
         // 恢复页面滚动
         document.body.style.overflow = '';

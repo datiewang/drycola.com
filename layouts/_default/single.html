@@ -43,12 +43,9 @@
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
   
-  {{- /* 内容中的TOC保持原样，用于移动端 */ -}}
-  {{- if (.Param "ShowToc") }}
-  <div class="toc-mobile">
-    {{- partial "toc.html" . }}
-  </div>
-  {{- end }}
+  {{- /* 自动检测是否有标题来显示TOC */ -}}
+  {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
+  {{- $has_headers := ge (len $headers) 1 -}}
 
   {{- if .Content }}
   <div class="post-content">
@@ -79,7 +76,7 @@
 </article>
 
 {{- /* 右侧固定TOC */ -}}
-{{- if (.Param "ShowToc") }}
+{{- if $has_headers }}
 <aside class="toc-sidebar" id="toc-sidebar">
   <div class="toc-sidebar-content">
     <div class="toc-sidebar-header">
@@ -87,8 +84,6 @@
       <button class="toc-sidebar-toggle" id="toc-toggle">×</button>
     </div>
     <nav class="toc-sidebar-nav" id="TableOfContentsSidebar">
-      {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
-      {{- $has_headers := ge (len $headers) 1 -}}
       {{- if $has_headers -}}
       {{- $largest := 6 -}}
       {{- range $headers -}}
@@ -120,13 +115,13 @@
 {{- end }}
 
 {{- /* 移动端TOC悬浮按钮和遮罩 */ -}}
-{{- if (.Param "ShowToc") }}
+{{- if $has_headers }}
 <div class="toc-mobile-overlay" id="toc-mobile-overlay"></div>
 <button class="toc-mobile-toggle" id="toc-mobile-toggle" title="打开快速导览">📋</button>
 {{- end }}
 
 {{- /* 包含TOC侧边栏的JavaScript */ -}}
-{{- if (.Param "ShowToc") }}
+{{- if $has_headers }}
 {{- partial "toc-sidebar.html" . }}
 {{- end }}
 

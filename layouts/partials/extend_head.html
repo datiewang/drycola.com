@@ -258,11 +258,22 @@ body.home .main {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    display: none;
 }
 
 .toc-mobile-overlay.active {
     opacity: 1;
     visibility: visible;
+    display: block;
+}
+
+/* 桌面端强制隐藏遮罩层 */
+@media (min-width: 1201px) {
+    .toc-mobile-overlay {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
 }
 
 /* 移动端TOC悬浮按钮 */
@@ -401,10 +412,6 @@ body.home .main {
 .toc-level-5 .toc-sidebar-link { padding-left: 48px; font-size: 0.75em; }
 .toc-level-6 .toc-sidebar-link { padding-left: 56px; font-size: 0.75em; }
 
-/* 隐藏内容中的TOC在桌面端 */
-.toc-mobile {
-    display: none;
-}
 
 /* 响应式处理 */
 @media (max-width: 1400px) {
@@ -424,10 +431,6 @@ body.home .main {
 @media (max-width: 1200px) {
     .toc-sidebar {
         display: none;
-    }
-    
-    .toc-mobile {
-        display: block;
     }
 }
 
@@ -473,23 +476,54 @@ body.home .main {
     max-height: 100vh;
 }
 
-/* 桌面端隐藏状态下的TOC样式 */
+/* 桌面端隐藏状态下的TOC样式 - 简化版本 */
 .toc-sidebar.hidden:not(.mobile-mode) {
-    transform: translateY(-50%) translateX(calc(100% - 50px)) !important;
+    right: 20px !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: var(--entry) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    overflow: hidden !important;
 }
 
 .toc-sidebar.hidden .toc-sidebar-content {
-    pointer-events: none;
+    display: none !important;
 }
 
 .toc-sidebar.hidden .toc-sidebar-header {
-    pointer-events: auto;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* 确保隐藏按钮在桌面端始终可见 */
 .toc-sidebar.hidden .toc-sidebar-toggle {
-    pointer-events: auto;
-    opacity: 1;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--secondary) !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.toc-sidebar.hidden .toc-sidebar-toggle:hover {
+    background: var(--tertiary) !important;
+    color: var(--primary) !important;
+}
+
+.toc-sidebar.hidden .toc-sidebar-title {
+    display: none !important;
 }
 
 /* 面包屑导航样式 */

@@ -34,14 +34,11 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
   ShowCodeCopyButtons = true
   ShowWordCount = true
   ShowRssButtonInSectionTermList = true
-  UseHugoToc = true
   disableSpecial1stPost = false
   disableScrollToTop = false
   comments = false
   hidemeta = false
   hideSummary = false
-  showtoc = false
-  tocopen = false
   
   # 确保中文显示
   defaultTheme = "auto"
