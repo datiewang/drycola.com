@@ -1,0 +1,77 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description }}
+  </div>
+  {{- end }}
+</header>
+
+{{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+
+{{- if .Site.Params.ShowAllPagesInArchive }}
+{{- $pages = .Site.RegularPages }}
+{{- end }}
+
+{{- range $pages.GroupByPublishDate "2006" }}
+{{- if ne .Key "0001" }}
+<div class="archive-year">
+  <h2 class="archive-year-header">
+    {{- replace .Key "0001" "" }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
+  </h2>
+  {{- range .Pages }}
+  <div class="archive-month">
+    <div class="archive-entry">
+      <h3 class="archive-entry-title">
+        <span class="archive-meta">
+          <time>{{ .Date.Format "01-02" }}</time>
+          {{- with .Params.categories }}
+          {{- range first 1 . }}
+          <span class="archive-category">{{ . }}</span>
+          {{- end }}
+          {{- end }}
+        </span>
+        <a href="{{ .Permalink }}" aria-label="post link">{{ .Title | markdownify }}</a>&nbsp;
+      </h3>
+    </div>
+  </div>
+  {{- end }}
+</div>
+{{- end }}
+{{- end }}
+
+<style>
+.archive-meta {
+  font-size: 0.85em;
+  color: var(--secondary);
+  margin-right: 8px;
+}
+
+.archive-category {
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  font-size: 0.8em;
+}
+
+.archive-entry-title {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.archive-year-header {
+  margin: 40px 0 20px 0;
+  color: var(--primary);
+}
+
+.archive-count {
+  font-size: 0.6em;
+  color: var(--secondary);
+}
+</style>
+
+{{- end }}{{/* end main */}}

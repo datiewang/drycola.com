@@ -1,0 +1,77 @@
+{{- define "main" }}
+
+{{- if (.Param "homeInfoParams") }}
+{{- partial "home_info.html" . }}
+{{- end }}
+
+{{- $paginator := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) }}
+{{- if and .Site.Params.homeInfoParams (gt $paginator.TotalPages 1) }}
+<div class="posts-separator"></div>
+{{- end }}
+
+<div id="main">
+{{- if and (not .Site.Params.homeInfoParams) (.Site.Params.ProfileMode.Enabled) }}
+{{- partial "index_profile.html" . }}
+{{- end }}
+
+{{- $pages := $paginator.Pages }}
+{{- if gt (len $pages) 0}}
+<div class="posts-group">
+{{- range $pages }}
+{{- partial "post_entry.html" . }}
+{{- end }}
+</div>
+{{- end }}
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+      «&nbsp;{{ i18n "prev_page" | default "Prev" }}
+    </a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+      {{ i18n "next_page" | default "Next" }}&nbsp;»
+    </a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+
+</div>
+
+<style>
+.posts-separator {
+  margin: 20px 0;
+  border-top: 1px solid var(--border);
+}
+
+.posts-group {
+  margin-top: 20px;
+}
+
+#main .post-entry {
+  margin-bottom: 20px;
+}
+
+.home-info {
+  margin-bottom: 20px;
+}
+
+.home-info .home-subtitle {
+  margin-top: 8px;
+}
+
+/* 减少主页各部分之间的间距 */
+.main {
+  padding-top: 20px;
+}
+
+.profile {
+  margin-bottom: 20px;
+}
+</style>
+
+{{- end }}{{/* end main */}}
