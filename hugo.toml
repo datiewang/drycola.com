@@ -29,8 +29,8 @@ defaultContentLanguage = "zh-cn"  # 默认内容语言
   comments = false
   hidemeta = false
   hideSummary = false
-  showtoc = true
-  tocopen = true
+  showtoc = false
+  tocopen = false
   
   # 确保中文显示
   defaultTheme = "auto"

@@ -54,7 +54,7 @@ body.home .main {
     width: auto !important;
 }
 
-/* TOC 目录样式优化 */
+/* 快速导览样式优化 */
 .toc {
     background: var(--code-bg);
     border: 1px solid var(--border);
@@ -68,14 +68,21 @@ body.home .main {
     margin: 0;
 }
 
+.toc details[open] summary {
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
 .toc summary {
     font-weight: 600;
     color: var(--primary);
     cursor: pointer;
-    margin-bottom: 12px;
+    margin-bottom: 0;
     font-size: 1em;
     padding: 4px 0;
     list-style: none;
+    transition: color 0.2s ease;
 }
 
 .toc summary::-webkit-details-marker {
@@ -84,31 +91,36 @@ body.home .main {
 
 .toc summary::before {
     content: "📋 ";
-    margin-right: 4px;
+    margin-right: 6px;
 }
 
 .toc summary:hover {
     color: var(--tertiary);
 }
 
+.toc nav {
+    margin-top: 12px;
+}
+
 .toc nav ul {
     margin: 0;
-    padding-left: 16px;
+    padding-left: 0;
     list-style: none;
 }
 
-.toc nav li {
-    margin: 6px 0;
-    line-height: 1.5;
+.toc nav > ul > li {
+    margin: 8px 0;
+    line-height: 1.4;
 }
 
 .toc nav a {
     color: var(--secondary);
     text-decoration: none;
-    padding: 3px 6px;
+    padding: 4px 8px;
     display: block;
-    border-radius: 3px;
+    border-radius: 4px;
     transition: all 0.2s ease;
+    font-size: 0.95em;
 }
 
 .toc nav a:hover {
@@ -117,14 +129,31 @@ body.home .main {
     background-opacity: 0.1;
 }
 
+/* 一级标题样式 */
+.toc nav > ul > li > a {
+    font-weight: 500;
+    color: var(--primary);
+}
+
 /* TOC嵌套列表样式 */
 .toc nav ul ul {
-    padding-left: 12px;
-    margin-top: 2px;
+    padding-left: 16px;
+    margin-top: 4px;
+}
+
+.toc nav ul ul li {
+    margin: 4px 0;
 }
 
 .toc nav ul ul a {
-    font-size: 0.9em;
-    opacity: 0.85;
+    font-size: 0.85em;
+    opacity: 0.8;
+    padding: 2px 6px;
+}
+
+.toc nav ul ul ul a {
+    font-size: 0.8em;
+    opacity: 0.7;
+    padding-left: 8px;
 }
 </style>
