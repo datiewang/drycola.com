@@ -2,26 +2,125 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tocSidebar = document.getElementById('toc-sidebar');
     const tocToggle = document.getElementById('toc-toggle');
+    const tocMobileToggle = document.getElementById('toc-mobile-toggle');
+    const tocMobileOverlay = document.getElementById('toc-mobile-overlay');
     const tocLinks = document.querySelectorAll('.toc-sidebar-link');
     
     if (!tocSidebar) return;
     
-    // 切换TOC显示/隐藏
+    // 检测TOC是否应该显示（只在有内容时显示）
+    if (tocLinks.length === 0) {
+        tocSidebar.style.display = 'none';
+        const mobileToggle = document.getElementById('toc-mobile-toggle');
+        const mobileOverlay = document.getElementById('toc-mobile-overlay');
+        if (mobileToggle) {
+            mobileToggle.style.display = 'none';
+        }
+        if (mobileOverlay) {
+            mobileOverlay.style.display = 'none';
+        }
+        return;
+    }
+    
+    // 获取当前屏幕尺寸状态
+    function isMobile() {
+        return window.innerWidth <= 1200;
+    }
+    
+    // 更新TOC显示状态
+    function updateTocDisplay() {
+        if (isMobile()) {
+            // 移动端：显示悬浮按钮，隐藏侧边栏
+            tocSidebar.classList.add('mobile-mode');
+            const mobileToggle = document.getElementById('toc-mobile-toggle');
+            if (mobileToggle) {
+                mobileToggle.style.display = 'block';
+            }
+        } else {
+            // 桌面端：隐藏悬浮按钮，显示侧边栏
+            tocSidebar.classList.remove('mobile-mode', 'mobile-open');
+            const mobileToggle = document.getElementById('toc-mobile-toggle');
+            if (mobileToggle) {
+                mobileToggle.style.display = 'none';
+            }
+            // 桌面端默认显示，除非用户主动隐藏
+            if (!tocSidebar.hasAttribute('data-user-hidden')) {
+                tocSidebar.classList.remove('hidden');
+            }
+        }
+    }
+    
+    // 桌面端切换TOC显示/隐藏
     if (tocToggle) {
         tocToggle.addEventListener('click', function() {
             if (tocSidebar.classList.contains('hidden')) {
                 // 显示TOC
                 tocSidebar.classList.remove('hidden');
+                tocSidebar.removeAttribute('data-user-hidden');
                 tocToggle.textContent = '×';
                 tocToggle.title = '关闭快速导览';
             } else {
                 // 隐藏TOC
                 tocSidebar.classList.add('hidden');
+                tocSidebar.setAttribute('data-user-hidden', 'true');
                 tocToggle.textContent = '📋';
                 tocToggle.title = '打开快速导览';
             }
         });
     }
+    
+    // 移动端切换TOC显示/隐藏
+    if (tocMobileToggle) {
+        tocMobileToggle.addEventListener('click', function() {
+            if (tocSidebar.classList.contains('mobile-open')) {
+                closeMobileToc();
+            } else {
+                openMobileToc();
+            }
+        });
+    }
+    
+    // 移动端打开TOC
+    function openMobileToc() {
+        tocSidebar.classList.add('mobile-open');
+        if (tocMobileOverlay) {
+            tocMobileOverlay.classList.add('active');
+        }
+        tocMobileToggle.textContent = '×';
+        tocMobileToggle.title = '关闭快速导览';
+        // 防止页面滚动
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // 移动端关闭TOC
+    function closeMobileToc() {
+        tocSidebar.classList.remove('mobile-open');
+        if (tocMobileOverlay) {
+            tocMobileOverlay.classList.remove('active');
+        }
+        tocMobileToggle.textContent = '📋';
+        tocMobileToggle.title = '打开快速导览';
+        // 恢复页面滚动
+        document.body.style.overflow = '';
+    }
+    
+    // 移动端点击遮罩层或外部区域关闭TOC
+    if (tocMobileOverlay) {
+        tocMobileOverlay.addEventListener('click', function() {
+            if (isMobile() && tocSidebar.classList.contains('mobile-open')) {
+                closeMobileToc();
+            }
+        });
+    }
+    
+    // 移动端点击外部区域关闭TOC
+    document.addEventListener('click', function(e) {
+        if (isMobile() && tocSidebar.classList.contains('mobile-open')) {
+            if (!tocSidebar.contains(e.target) && !tocMobileToggle.contains(e.target)) {
+                closeMobileToc();
+            }
+        }
+    });
     
     // 滚动时高亮当前章节
     function updateActiveLink() {
@@ -65,8 +164,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // 初始化活动链接
-    updateActiveLink();
+    // 监听窗口大小变化
+    window.addEventListener('resize', function() {
+        updateTocDisplay();
+    });
     
     // 平滑滚动到目标位置
     tocLinks.forEach(link => {
@@ -81,13 +182,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: targetTop,
                     behavior: 'smooth'
                 });
+                
+                // 移动端点击链接后自动关闭TOC
+                if (isMobile() && tocSidebar.classList.contains('mobile-open')) {
+                    closeMobileToc();
+                }
             }
         });
     });
     
-    // 检测TOC是否应该显示（只在有内容时显示）
-    if (tocLinks.length === 0) {
-        tocSidebar.style.display = 'none';
-    }
+    // 初始化
+    updateTocDisplay();
+    updateActiveLink();
 });
 </script>

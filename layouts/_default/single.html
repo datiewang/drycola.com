@@ -119,6 +119,12 @@
 </aside>
 {{- end }}
 
+{{- /* 移动端TOC悬浮按钮和遮罩 */ -}}
+{{- if (.Param "ShowToc") }}
+<div class="toc-mobile-overlay" id="toc-mobile-overlay"></div>
+<button class="toc-mobile-toggle" id="toc-mobile-toggle" title="打开快速导览">📋</button>
+{{- end }}
+
 {{- /* 包含TOC侧边栏的JavaScript */ -}}
 {{- if (.Param "ShowToc") }}
 {{- partial "toc-sidebar.html" . }}
