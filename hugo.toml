@@ -1,8 +1,9 @@
 baseURL = "https://drycola.com/"  # 改成你的实际 URL 或 GitHub Pages 地址
-languageCode = "en"
+languageCode = "zh-cn"
 title = "Drycola"
 theme = "PaperMod"
 enableRobotsTXT = true  # 生成 robots.txt 文件
+defaultContentLanguage = "zh-cn"  # 默认内容语言
 
 # 输出格式配置（用于搜索功能）
 [outputs]
@@ -11,8 +12,8 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
 # 网站元信息配置
 [params]
   author = "datiewang"
-  description = "Chronicling life in Japan. Politics, culture, and the spaces between."
-  keywords = ["Blog", "Japan", "Politics", "Culture", "Daily Life"]
+  description = "记录在日本的生活。政治、文化，以及其间的空隙。"
+  keywords = ["博客", "日本", "政治", "文化", "日常生活"]
   
   # PaperMod 主题配置
   ShowReadingTime = true
@@ -30,11 +31,23 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
   hideSummary = false
   showtoc = false
   tocopen = false
+  
+  # 确保中文显示
+  defaultTheme = "auto"
+  disableThemeToggle = false
+  
+  # 页面标题配置
+  label = [
+    {text = "归档", url = "/archive/"},
+    {text = "分类", url = "/categories/"},
+    {text = "标签", url = "/tags/"},
+    {text = "搜索", url = "/search/"}
+  ]
 
   # Home Info 模式配置 (Regular Mode)
   [params.homeInfoParams]
     Title = "datiewang"
-    Content = "Chronicling life in Japan. Politics, culture, and the spaces between."
+    Content = "记录在日本的生活。政治、文化，以及其间的空隙。"
   
   # 社交图标配置（可选）
   socialIcons = [
@@ -49,21 +62,21 @@ enableRobotsTXT = true  # 生成 robots.txt 文件
 
 # 主菜单配置
 [[menu.main]]
-name = "Archive"
+name = "归档"
 url = "/archive/"
 weight = 10
 
 [[menu.main]]
-name = "Categories"
+name = "分类"
 url = "/categories/"
 weight = 20
 
 [[menu.main]]
-name = "Search"
+name = "搜索"
 url = "/search/"
 weight = 30
 
 [[menu.main]]
-name = "Tags"
+name = "标签"
 url = "/tags/"
 weight = 40
