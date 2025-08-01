@@ -4,9 +4,9 @@ A personal blog about daily life in Japan, built with Hugo and the PaperMod them
 
 ## About
 
-- **Author**: 王小铁
+- **Author**: datiewang
 - **Theme**: PaperMod
-- **Languages**: Chinese (zh-cn) and English
+- **Languages**: Chinese (zh-cn)
 - **URL**: https://drycola.com/
 
 ## Development
