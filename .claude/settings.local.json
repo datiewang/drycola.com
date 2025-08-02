@@ -14,7 +14,10 @@
       "WebFetch(domain:drycola.com)",
       "Bash(cp:*)",
       "WebFetch(domain:hungchienhsiang.medium.com)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)"
     ],
     "deny": []
   }
