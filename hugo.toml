@@ -34,6 +34,7 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
   ShowCodeCopyButtons = true
   ShowWordCount = true
   ShowRssButtonInSectionTermList = true
+  ShowFullTextinRSS = true
   disableSpecial1stPost = false
   disableScrollToTop = false
   comments = false

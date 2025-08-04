@@ -16,9 +16,25 @@
         &nbsp;»&nbsp;
       {{- end -}}
       {{- if ne $ancestor $current -}}
-        <a href="{{ $ancestor.RelPermalink }}">{{ $ancestor.Title }}</a>
+        <a href="{{ $ancestor.RelPermalink }}">
+          {{- if eq $ancestor.Title "Categories" -}}
+            分类
+          {{- else if eq $ancestor.Title "Tags" -}}
+            标签
+          {{- else -}}
+            {{ $ancestor.Title }}
+          {{- end -}}
+        </a>
       {{- else -}}
-        <span class="breadcrumb-current">{{ $ancestor.Title }}</span>
+        <span class="breadcrumb-current">
+          {{- if eq $ancestor.Title "Categories" -}}
+            分类
+          {{- else if eq $ancestor.Title "Tags" -}}
+            标签
+          {{- else -}}
+            {{ $ancestor.Title }}
+          {{- end -}}
+        </span>
       {{- end -}}
     {{- end -}}
   {{- end -}}

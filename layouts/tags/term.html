@@ -2,7 +2,6 @@
 
 {{- if not .IsHome }}
 <header class="page-header">
-  {{- partial "breadcrumbs.html" . }}
   <h1>
     {{ .Title }}
     {{- with .OutputFormats.Get "rss" }}
