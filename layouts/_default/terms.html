@@ -1,0 +1,171 @@
+{{- define "main" }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{ .Title }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS" style="margin-left: 10px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- /* 判断是categories还是tags页面 */ -}}
+{{- if eq .Type "categories" }}
+  {{- /* 分类页面内容 */ -}}
+  <div class="categories-grid">
+    {{- range $name, $taxonomy := .Site.Taxonomies.categories }}
+    {{- $categoryPosts := $taxonomy.Pages }}
+    {{- $categoryCount := len $categoryPosts }}
+    <div class="category-card">
+      <div class="category-header">
+        <h2 class="category-name">
+          <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}/">
+            <span class="category-icon">📰</span>
+            {{ $name }}
+          </a>
+        </h2>
+        <div class="category-count">{{ $categoryCount }} 篇文章</div>
+      </div>
+      <div class="category-preview">
+        {{- range first 3 $categoryPosts.ByDate.Reverse }}
+        <div class="category-post-item">
+          <a href="{{ .Permalink }}" class="category-post-link">
+            <span class="category-post-title">{{ .Title }}</span>
+            <span class="category-post-date">{{ .Date.Format "01-02" }}</span>
+          </a>
+        </div>
+        {{- end }}
+        {{- if gt $categoryCount 3 }}
+        <div class="category-more">
+          <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}/" class="category-more-link">
+            查看全部 {{ $categoryCount }} 篇文章 →
+          </a>
+        </div>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+  </div>
+
+{{- else if eq .Type "tags" }}
+  {{- /* 标签页面内容 */ -}}
+  <div class="tags-cloud">
+    {{- range $name, $taxonomy := .Site.Taxonomies.tags }}
+    {{- $tagCount := len $taxonomy.Pages }}
+    {{- $weight := div (mul $tagCount 5) 10 }}
+    {{- if lt $weight 1 }}{{ $weight = 1 }}{{ end }}
+    {{- if gt $weight 6 }}{{ $weight = 6 }}{{ end }}
+    <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}/" class="tag-cloud-item tag-weight-{{ $weight }}">
+      <span class="tag-name">{{ $name }}</span>
+      <span class="tag-count">{{ $tagCount }}</span>
+    </a>
+    {{- end }}
+  </div>
+
+{{- else }}
+  {{- /* 默认页面内容 */ -}}
+  {{- $pages := union .RegularPages .Sections }}
+  {{- $paginator := .Paginate $pages }}
+
+  {{- $term := .Data.Term }}
+  {{- range $index, $page := $paginator.Pages }}
+
+  {{- $class := "post-entry" }}
+  {{- if $term }}
+  {{- $class = "post-entry tag-entry" }}
+  {{- end }}
+
+  <article class="{{ $class }}">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">
+        {{- .Title }}
+        {{- if .Draft }}
+        <span class="entry-hint" title="Draft">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+            <path
+              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+          </svg>
+        </span>
+        {{- end }}
+      </h2>
+    </header>
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">
+      <div class="entry-meta">
+        {{- /* 添加分类信息 */ -}}
+        {{- with .Params.categories }}
+        {{- range . }}
+        <span class="entry-category">
+          <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">📰 {{ . }}</a>
+        </span>
+        {{- end }}
+        {{- end }}
+        
+        {{- /* 分隔符 */ -}}
+        {{- if and .Params.categories (or (.Param "ShowReadingTime") (.Param "ShowWordCount") .Date (not (.Param "hideAuthor"))) }}
+        <span class="entry-separator">&nbsp;·&nbsp;</span>
+        {{- end }}
+        
+        {{- /* 原有的meta信息 */ -}}
+        {{- partial "post_meta.html" . -}}
+      </div>
+    </footer>
+    {{- end }}
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+
+  {{- if gt $paginator.TotalPages 1 }}
+  <footer class="page-footer">
+    <nav class="pagination">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+        «&nbsp;{{ i18n "prev_page" }}&nbsp;
+        {{- if (.Param "ShowPageNums") }}
+        {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
+        {{- end }}
+      </a>
+      {{- end }}
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+        {{- i18n "next_page" }}&nbsp;
+        {{- if (.Param "ShowPageNums") }}
+        {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
+        {{- end }}&nbsp;»
+      </a>
+      {{- end }}
+    </nav>
+  </footer>
+  {{- end }}
+
+{{- end }}
+
+{{- end }}{{- /* end main */ -}}
