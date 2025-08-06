@@ -11,7 +11,7 @@ other = "归档"
 other = "搜索"
 
 [posts]
-other = "文章"
+other = "归档"
 
 [readingTime]
 other = "{{ .Count }} 分钟阅读"
