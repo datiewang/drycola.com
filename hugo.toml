@@ -24,6 +24,7 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
   author = "datiewang"
   description = "记录在日本的生活。政治、文化，以及其间的空隙。"
   keywords = ["博客", "日本", "政治", "文化", "日常生活"]
+  images = ["/favicon.svg"]
   
   
   # PaperMod 主题配置
@@ -64,7 +65,7 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
 # 主菜单配置
 [[menu.main]]
 name = "归档"
-url = "/archive/"
+url = "/posts/"
 weight = 10
 
 [[menu.main]]
