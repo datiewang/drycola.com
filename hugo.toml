@@ -65,7 +65,7 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
 # 主菜单配置
 [[menu.main]]
 name = "归档"
-url = "/posts/"
+url = "/archive/"
 weight = 10
 
 [[menu.main]]
