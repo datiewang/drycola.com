@@ -19,6 +19,12 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
+# Sitemap 配置
+[sitemap]
+  changefreq = "daily"
+  filename = "sitemap.xml"
+  priority = 0.5
+
 # 网站元信息配置
 [params]
   author = "datiewang"
