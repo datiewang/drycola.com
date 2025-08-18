@@ -23,6 +23,7 @@
       "Bash(pkill:*)",
       "Bash(hugo:*)"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits"
   }
 }

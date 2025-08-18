@@ -16,15 +16,19 @@
         &nbsp;»&nbsp;
       {{- end -}}
       {{- if ne $ancestor $current -}}
-        <a href="{{ $ancestor.RelPermalink }}">
-          {{- if eq $ancestor.Title "Categories" -}}
-            分类
-          {{- else if eq $ancestor.Title "Tags" -}}
-            标签
-          {{- else -}}
-            {{ $ancestor.Title }}
-          {{- end -}}
-        </a>
+        {{- if and (eq $ancestor.Section "posts") (eq $ancestor.Kind "section") -}}
+          <a href="/archive/">归档</a>
+        {{- else -}}
+          <a href="{{ $ancestor.RelPermalink }}">
+            {{- if eq $ancestor.Title "Categories" -}}
+              分类
+            {{- else if eq $ancestor.Title "Tags" -}}
+              标签
+            {{- else -}}
+              {{ $ancestor.Title }}
+            {{- end -}}
+          </a>
+        {{- end -}}
       {{- else -}}
         <span class="breadcrumb-current">
           {{- if eq $ancestor.Title "Categories" -}}
