@@ -21,7 +21,10 @@
       "Bash(mkdir:*)",
       "Bash(mv:*)",
       "Bash(pkill:*)",
-      "Bash(hugo:*)"
+      "Bash(hugo:*)",
+      "Bash(chmod:*)",
+      "Bash(./update_authors.sh)",
+      "Bash(./set_homepage_visibility.sh:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

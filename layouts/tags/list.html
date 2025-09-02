@@ -14,17 +14,120 @@
 </div>
 {{- end }}
 
+<style>
+.section-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--primary);
+  border-bottom: 2px solid var(--tertiary);
+  padding-bottom: 8px;
+}
+
+.authors-section {
+  margin-bottom: 32px;
+}
+
+.authors-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.author-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--theme);
+  color: var(--primary);
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+.author-tag-item:hover {
+  border-color: var(--tertiary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.author-name {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.author-count {
+  background: var(--tertiary);
+  color: var(--theme);
+  font-size: 0.75em;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.author-tag-item:hover .author-count {
+  background: var(--tertiary);
+  color: var(--theme);
+}
+
+.separator {
+  height: 2px;
+  background: linear-gradient(90deg, var(--tertiary), transparent);
+  margin: 32px 0;
+  border-radius: 1px;
+}
+
+.tags-section {
+  margin-top: 16px;
+}
+</style>
+
+{{/* 作者标签置顶 */}}
+{{- $authors := site.Taxonomies.authors }}
+{{- if $authors }}
+<div class="authors-section">
+  <h3 class="section-title">作者</h3>
+  <div class="authors-cloud">
+    {{/* datiewang 永远在第一位 */}}
+    {{- with $authors.datiewang }}
+    <a href="/authors/datiewang/" class="author-tag-item">
+      <span class="author-name">datiewang</span>
+      <span class="author-count">{{ .Count }}</span>
+    </a>
+    {{- end }}
+    
+    {{/* 其他作者按字母顺序 */}}
+    {{- range $authors.Alphabetical }}
+    {{- if ne .Name "datiewang" }}
+    <a href="/authors/{{ .Name | urlize }}/" class="author-tag-item">
+      <span class="author-name">{{ .Name }}</span>
+      <span class="author-count">{{ .Count }}</span>
+    </a>
+    {{- end }}
+    {{- end }}
+  </div>
+</div>
+{{- end }}
+
 {{- $tags := .Data.Terms.ByCount }}
 {{- if $tags }}
-<div class="tags-cloud">
-  {{- range $tags }}
-  {{- $weight := div (mul .Count 5.0) (add (len $.Data.Terms) 1) }}
-  {{- $weight := math.Ceil (add $weight 0.8) }}
-  <a href="{{ .Page.Permalink }}" class="tag-cloud-item tag-weight-{{ $weight }}">
-    <span class="tag-name"># {{ .Page.Title }}</span>
-    <span class="tag-count">{{ .Count }}</span>
-  </a>
-  {{- end }}
+<div class="tags-section">
+  <h3 class="section-title">标签</h3>
+  <div class="tags-cloud">
+    {{- range $tags }}
+    {{- $weight := div (mul .Count 5.0) (add (len $.Data.Terms) 1) }}
+    {{- $weight := math.Ceil (add $weight 0.8) }}
+    <a href="{{ .Page.Permalink }}" class="tag-cloud-item tag-weight-{{ $weight }}">
+      <span class="tag-name"># {{ .Page.Title }}</span>
+      <span class="tag-count">{{ .Count }}</span>
+    </a>
+    {{- end }}
+  </div>
 </div>
 {{- end }}
 
