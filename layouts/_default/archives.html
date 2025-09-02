@@ -65,6 +65,9 @@
                 {{- range first 1 .Params.categories }}
                 <span class="post-category">{{ . }}</span>
                 {{- end }}
+                {{- range first 1 .Params.authors }}
+                <span class="post-author">{{ . }}</span>
+                {{- end }}
                 {{- if .Params.tags }}
                 <span class="post-tags">
                   {{- range first 2 .Params.tags }}
@@ -108,12 +111,12 @@
 }
 
 .year-count {
-  background: var(--tertiary);
+  background: var(--primary);
   color: var(--theme);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .archive-months-grid {
@@ -158,8 +161,8 @@
 
 .month-count {
   font-size: 0.8rem;
-  color: var(--secondary);
-  font-weight: 400;
+  color: var(--primary);
+  font-weight: 500;
   background: var(--code-bg);
   padding: 0.25rem 0.5rem;
   border-radius: 12px;
@@ -224,12 +227,21 @@
 }
 
 .post-category {
-  background: var(--tertiary);
-  color: var(--theme);
+  background: var(--code-bg);
+  color: var(--primary);
   padding: 0.125rem 0.5rem;
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 500;
+}
+
+.post-author {
+  background: var(--primary);
+  color: var(--theme);
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .post-tags {

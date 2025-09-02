@@ -1,7 +1,7 @@
 {{- define "main" }}
 
-{{- if not .IsHome }}
 <header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
   <h1>
     {{ .Title }}
     {{- with .OutputFormats.Get "rss" }}
@@ -15,101 +15,65 @@
     </a>
     {{- end }}
   </h1>
-  {{- if .Description }}
   <div class="post-description">
-    {{ .Description | markdownify }}
+    共 {{ len .RegularPages }} 篇文章
   </div>
-  {{- end }}
 </header>
-{{- end }}
 
-{{- if .Content }}
-<div class="post-content">
-  {{- if not (.Param "disableAnchoredHeadings") }}
-  {{- partial "anchored_headings.html" .Content -}}
-  {{- else }}{{ .Content }}{{ end }}
-</div>
-{{- end }}
-
-{{- $pages := .Pages }}
+{{- $pages := .RegularPages }}
 {{- $paginator := .Paginate $pages }}
 
-<div class="category-posts-container">
-  {{- range $paginator.Pages }}
-  <article class="category-post-entry">
-    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-    
-    <header class="category-entry-header">
-      <h2 class="category-entry-title">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        {{- if .Draft }}
-        <span class="entry-hint" title="Draft">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-            <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-          </svg>
-        </span>
-        {{- end }}
-      </h2>
-    </header>
-    
-    {{- if (ne (.Param "hideSummary") true) }}
-    <div class="category-entry-content">
-      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
-    </div>
-    {{- end }}
-    
-    {{- if not (.Param "hideMeta") }}
-    <footer class="category-entry-footer">
-      <div class="category-entry-meta">
-        {{- /* 显示发布日期 */ -}}
-        {{- if not (.Param "hideAuthor") }}
-        {{- $author := (.Param "author") | default site.Params.author | default (T "author") }}
-        <span class="entry-meta-item">
-          <span class="entry-author">{{ $author }}</span>
-        </span>
-        {{- end }}
-        
-        {{- if .Date }}
-        <span class="entry-meta-separator">&nbsp;·&nbsp;</span>
-        <span class="entry-meta-item">
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-            {{ .Date.Format "2006-01-02" }}
-          </time>
-        </span>
-        {{- end }}
-        
-        {{- /* 显示标签 */ -}}
-        {{- with .Params.tags }}
-        <span class="entry-meta-separator">&nbsp;·&nbsp;</span>
-        <span class="entry-meta-item">
-          <span class="entry-tags">
-            {{- range $index, $tag := . }}
-            {{- if gt $index 0 }}, {{ end }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag-link">#{{ . }}</a>
-            {{- end }}
-          </span>
-        </span>
-        {{- end }}
-        
-        {{- /* 显示阅读时间和字数 */ -}}
-        {{- if (.Param "ShowReadingTime") }}
-        <span class="entry-meta-separator">&nbsp;·&nbsp;</span>
-        <span class="entry-meta-item">{{ i18n "read_time" .ReadingTime }}</span>
-        {{- end }}
-        
-        {{- if (.Param "ShowWordCount") }}
-        <span class="entry-meta-separator">&nbsp;·&nbsp;</span>
-        <span class="entry-meta-item">{{ i18n "words" .WordCount }}</span>
-        {{- end }}
-      </div>
-    </footer>
-    {{- end }}
-    
-    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-  </article>
+{{- range $paginator.Pages }}
+<article class="post-entry">
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+      {{- end }}
+    </h2>
+  </header>
+  {{- if (ne (.Param "hideSummary") true) }}
+  <div class="entry-content">
+    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+  </div>
   {{- end }}
-</div>
+  {{- if not (.Param "hideMeta") }}
+  <footer class="entry-footer">
+    <div class="entry-meta">
+      {{- with .Params.authors }}
+      {{- range . }}
+      <span class="entry-author">
+        <a href="{{ "/authors/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+      </span>
+      {{- end }}
+      {{- end }}
+      
+      {{- if and .Params.authors .Date }}
+      <span class="entry-separator">&nbsp;·&nbsp;</span>
+      {{- end }}
+      
+      {{- if .Date }}
+      <span class="entry-date">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+          {{ .Date.Format "2006-01-02" }}
+        </time>
+      </span>
+      {{- end }}
+      
+      {{- partial "post_meta.html" . -}}
+    </div>
+  </footer>
+  {{- end }}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
 
 {{- if gt $paginator.TotalPages 1 }}
 <footer class="page-footer">

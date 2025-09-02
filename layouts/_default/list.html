@@ -91,13 +91,25 @@
       {{- with .Params.categories }}
       {{- range . }}
       <span class="entry-category">
-        <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">📰 {{ . }}</a>
+        <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+      </span>
+      {{- end }}
+      {{- end }}
+      
+      {{- /* 添加作者信息 */ -}}
+      {{- with .Params.authors }}
+      {{- if $.Params.categories }}
+      <span class="entry-separator">&nbsp;·&nbsp;</span>
+      {{- end }}
+      {{- range . }}
+      <span class="entry-author">
+        <a href="{{ "/authors/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
       </span>
       {{- end }}
       {{- end }}
       
       {{- /* 分隔符 */ -}}
-      {{- if and .Params.categories (or (.Param "ShowReadingTime") (.Param "ShowWordCount") .Date (not (.Param "hideAuthor"))) }}
+      {{- if and (or .Params.categories .Params.authors) (or (.Param "ShowReadingTime") (.Param "ShowWordCount") .Date (not (.Param "hideAuthor"))) }}
       <span class="entry-separator">&nbsp;·&nbsp;</span>
       {{- end }}
       

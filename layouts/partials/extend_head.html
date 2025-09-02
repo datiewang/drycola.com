@@ -105,13 +105,29 @@ body.home .main {
     padding: 2px 6px;
     border-radius: 3px;
     font-size: 0.8em;
-    color: var(--secondary);
+    color: var(--primary);
     text-decoration: none;
     transition: all 0.2s ease;
 }
 
 .entry-category a:hover {
     background: var(--tertiary);
+    color: var(--theme) !important;
+}
+
+.entry-author a {
+    background: var(--tertiary);
+    color: var(--theme);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.entry-author a:hover {
+    background: var(--primary);
     color: var(--theme) !important;
 }
 
@@ -475,7 +491,7 @@ body.home .main {
     background: var(--code-bg);
     padding: 2px 6px;
     border-radius: 3px;
-    color: var(--secondary);
+    color: var(--primary);
     text-decoration: none;
     transition: all 0.2s ease;
 }

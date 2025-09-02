@@ -24,7 +24,8 @@
       "Bash(hugo:*)",
       "Bash(chmod:*)",
       "Bash(./update_authors.sh)",
-      "Bash(./set_homepage_visibility.sh:*)"
+      "Bash(./set_homepage_visibility.sh:*)",
+      "WebFetch(domain:localhost)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"
