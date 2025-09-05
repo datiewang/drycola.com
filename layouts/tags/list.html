@@ -70,69 +70,63 @@
   font-weight: 600;
 }
 
-.author-tag-item:hover .author-count {
-  background: var(--tertiary);
-  color: var(--theme);
-}
-
-.separator {
-  height: 2px;
-  background: linear-gradient(90deg, var(--tertiary), transparent);
-  margin: 32px 0;
-  border-radius: 1px;
-}
-
 .categories-section {
   margin: 32px 0;
 }
 
-.categories-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
   margin-bottom: 16px;
 }
 
-.category-tag-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
+.category-card {
   background: var(--theme);
-  color: var(--secondary);
-  border-radius: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
-  font-weight: 500;
-  border: 1px solid var(--border);
-  vertical-align: middle;
+  display: block;
 }
 
-.category-tag-item:hover {
-  border-color: var(--secondary);
-  color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.category-card:hover {
+  border-color: var(--tertiary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
 }
 
-.category-name {
+.category-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.category-card-name {
   font-size: 1em;
-  font-weight: 500;
-  line-height: 1;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0;
 }
 
-.category-count {
-  background: var(--secondary);
+.category-card-count {
+  background: var(--tertiary);
   color: var(--theme);
   font-size: 0.75em;
-  padding: 2px 6px;
+  padding: 3px 7px;
   border-radius: 10px;
   font-weight: 600;
+  min-width: 20px;
+  text-align: center;
 }
 
-.category-tag-item:hover .category-count {
-  background: var(--primary);
-  color: var(--theme);
+.category-card-desc {
+  color: var(--secondary);
+  font-size: 0.85em;
+  margin: 0;
 }
 
 .tags-section {
@@ -172,11 +166,14 @@
 {{- if $categories }}
 <div class="categories-section">
   <h3 class="section-title">分类</h3>
-  <div class="categories-cloud">
+  <div class="categories-grid">
     {{- range $categories.ByCount }}
-    <a href="/categories/{{ .Name | urlize }}/" class="category-tag-item">
-      <span class="category-name">{{ .Name }}</span>
-      <span class="category-count">{{ .Count }}</span>
+    <a href="/categories/{{ .Name | urlize }}/" class="category-card">
+      <div class="category-card-header">
+        <h4 class="category-card-name">{{ .Name }}</h4>
+        <span class="category-card-count">{{ .Count }}</span>
+      </div>
+      <p class="category-card-desc">{{ .Count }} 篇文章</p>
     </a>
     {{- end }}
   </div>
