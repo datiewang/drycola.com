@@ -23,7 +23,7 @@ hasCJKLanguage = true  # 启用CJK（中日韩）语言支持，正确计算中�
 [taxonomies]
   category = "categories"
   tag = "tags"
-  author = "authors"
+  author = "author"
 
 # Sitemap 配置
 [sitemap]

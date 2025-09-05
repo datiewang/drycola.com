@@ -47,15 +47,13 @@
   {{- if not (.Param "hideMeta") }}
   <footer class="entry-footer">
     <div class="entry-meta">
-      {{- with .Params.authors }}
-      {{- range . }}
+      {{- if .Params.author }}
       <span class="entry-author">
-        <a href="{{ "/authors/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+        <a href="{{ "/author/" | relLangURL }}{{ .Params.author | urlize }}/">{{ .Params.author }}</a>
       </span>
       {{- end }}
-      {{- end }}
       
-      {{- if and .Params.authors .Date }}
+      {{- if and .Params.author .Date }}
       <span class="entry-separator">&nbsp;·&nbsp;</span>
       {{- end }}
       

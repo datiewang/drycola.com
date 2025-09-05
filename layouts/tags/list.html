@@ -135,14 +135,14 @@
 </style>
 
 {{/* 作者标签置顶 */}}
-{{- $authors := site.Taxonomies.authors }}
+{{- $authors := site.Taxonomies.author }}
 {{- if $authors }}
 <div class="authors-section">
   <h3 class="section-title">作者</h3>
   <div class="authors-cloud">
     {{/* datiewang 永远在第一位 */}}
     {{- with $authors.datiewang }}
-    <a href="/authors/datiewang/" class="author-tag-item">
+    <a href="/author/datiewang/" class="author-tag-item">
       <span class="author-name">datiewang</span>
       <span class="author-count">{{ .Count }}</span>
     </a>
@@ -151,7 +151,7 @@
     {{/* 其他作者按字母顺序 */}}
     {{- range $authors.Alphabetical }}
     {{- if ne .Name "datiewang" }}
-    <a href="/authors/{{ .Name | urlize }}/" class="author-tag-item">
+    <a href="/author/{{ .Name | urlize }}/" class="author-tag-item">
       <span class="author-name">{{ .Name }}</span>
       <span class="author-count">{{ .Count }}</span>
     </a>
